@@ -1,16 +1,25 @@
+import javax.xml.stream.events.Characters
 import kotlin.random.Random
 
 fun main(args: Array<String>) {
 
     val itemsList = mutableListOf<Tools>()
 
+    fun checkIsNotEmpty(): Boolean {
+        if(itemsList.isNullOrEmpty()){
+            println("twoje eq jest puste")
+            return false
+        }else return true
+    }
+
     fun pokazEq(){
-        for(item in itemsList){
-            println(item.nazwa)
-            println(item.nazwa.uppercase()+ ": " + "opis: "+item.opis + ", " + "wytrzymalosc: " + item.wytrzymalosc +
-                    ", " + "licznik uzyc: " + item.licznik_uzyc + ", " + "metoda uzycia: " + item.metoda_uzycia)
+        if(checkIsNotEmpty()){
+            for(item in itemsList){
+                println(item.nazwa.uppercase()+ ": " + "opis: "+item.opis + ", " + "wytrzymalosc: " + item.wytrzymalosc +
+                        ", " + "licznik uzyc: " + item.licznik_uzyc + ", " + "metoda uzycia: " + item.metoda_uzycia)
+            }
+            println()
         }
-        println()
     }
 
     fun addNewTool(kostka_pre: Int, liczba_uzyc_pre: Int){
@@ -78,69 +87,82 @@ fun main(args: Array<String>) {
         }
     }
 
+    fun isNumber(s: String): Boolean {
+        return try {
+            s.toInt()
+            true
+        } catch (ex: NumberFormatException) {
+            println("musisz podac liczbe")
+            false
+        }
+    }
+
     fun rzutKostka(){
         println("jaka kostka chcesz rzucic?")
         println("mozesz wybrac liczbe od 1 do 10")
         var chosenNumber: String? = readLine()
         var randomNumber = Random.nextInt(0, 10)
         if(chosenNumber != null){
-            var playerChoice = chosenNumber.toInt()
-            if(playerChoice <= 10 && playerChoice >= 1){
-                var result = playerChoice * randomNumber;
-                addNewTool(result, randomNumber)
-            }else{
-                println("liczba musi byc z przedzialu od 1 do 20\n")
+            if (isNumber(chosenNumber)){
+                var playerChoice: Int = chosenNumber.toInt()
+                if(playerChoice <= 10 && playerChoice >= 1){
+                    var result = playerChoice * randomNumber;
+                    addNewTool(result, randomNumber)
+                }else{
+                    println("liczba musi byc z przedzialu od 1 do 10\n")
+                }
+                println()
             }
-            println()
-        }else{
-            println("podaj liczbe od 1 do 20\n")
         }
-
     }
 
     fun usunElement(){
-        println("co chcesz usunąć?")
-        var toDelete = readLine()
-        for (item in itemsList){
-            if( item.nazwa == toDelete.toString()){
-                println("jest taki przedmiot")
-                itemsList.remove(item)
-                println("przedmiot usunięty\n")
-                return
-            }else{
-                println("nie ma takiego przedmiotu w eq\n")
+        if(checkIsNotEmpty()) {
+            println("co chcesz usunąć?")
+            var toDelete = readLine()
+            for (item in itemsList) {
+                if (item.nazwa == toDelete.toString()) {
+                    println("jest taki przedmiot")
+                    itemsList.remove(item)
+                    println("przedmiot usunięty\n")
+                    return
+                } else {
+                    println("nie ma takiego przedmiotu w eq\n")
+                }
             }
         }
     }
 
     fun uzyjElement(){
-        println("co chcesz uzyc?")
-        var doUzycia = readLine()
-        for (item in itemsList){
-            if( item.nazwa == doUzycia.toString()){
-                println("jest taki przedmiot")
-                var use = item.licznik_uzyc - 1
-                var resilience = item.wytrzymalosc - 5
-                item.licznik_uzyc = use
-                item.wytrzymalosc = resilience
-                println("Pozostała liczba uzyc: " + item.licznik_uzyc + "\n")
-                println("pozostala wytrzymalosc: "+ item.wytrzymalosc +"\n")
-                if(item.licznik_uzyc <= 0){
-                    itemsList.remove(item)
-                    println("przedmiot stracił liczbe uzyc i ulegl zniczeniu\n")
-                    return
-                }
-                if(item != null){
-                    if(item.wytrzymalosc <= 0){
+        if(checkIsNotEmpty()){
+            println("co chcesz uzyc?")
+            var doUzycia = readLine()
+            for (item in itemsList){
+                if( item.nazwa == doUzycia.toString()){
+                    println("jest taki przedmiot")
+                    var use = item.licznik_uzyc - 1
+                    var resilience = item.wytrzymalosc - 5
+                    item.licznik_uzyc = use
+                    item.wytrzymalosc = resilience
+                    println("Pozostała liczba uzyc: " + item.licznik_uzyc + "\n")
+                    println("pozostala wytrzymalosc: "+ item.wytrzymalosc +"\n")
+                    if(item.licznik_uzyc <= 0){
                         itemsList.remove(item)
-                        println("przedmiot stracił wytrzymalosc i ulegl zniczeniu\n")
+                        println("przedmiot stracił liczbe uzyc i ulegl zniczeniu\n")
+                        return
+                    }
+                    if(item != null){
+                        if(item.wytrzymalosc <= 0){
+                            itemsList.remove(item)
+                            println("przedmiot stracił wytrzymalosc i ulegl zniczeniu\n")
+                            return
+                        }
                         return
                     }
                     return
+                }else {
+                    println("nie ma takiego przedmiotu w eq\n")
                 }
-                return
-            }else{
-                println("nie ma takiego przedmiotu w eq\n")
             }
         }
     }
