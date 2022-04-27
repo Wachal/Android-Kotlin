@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">apkazajecia</string>
+    <string name="button">Losuj miejsce</string>
+    <string name="first_text">Wpisz poniżej swoje imię</string>
+    <string name="input_text"></string>
+</resources>
