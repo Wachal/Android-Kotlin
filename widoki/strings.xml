@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">aplikacja_lab2</string>
+    <string name="textViweTop">Podaj text</string>
+    <string name="button1">Zatwierdź</string>
+    <string name="no_target_selected">Ni ma takiego stringa sorry</string>
+    <string name="text_responsee">aa %1$s</string>
+</resources>
