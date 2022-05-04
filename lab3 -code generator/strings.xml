@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">aplikacja_lab2</string>
+    <string name="textViweTop">Podaj text</string>
+    <string name="button1">Zatwierdź</string>
+    <string name="no_target_selected">Ni ma takiego stringa sorry</string>
+    <string name="text_code">Twoje zaszyfrowane słowo wygląda tak: %1$s</string>
+    <string name="text_orginal">Orginalny text to: %1$s</string>
+    <string name="textViweTop2">Wybierz szyfr</string>
+    <string name="share_button">Udostępnij</string>
+    <string name="goBack_button">Wróć</string>
+    <string name="switch1">Udostępnić dodatkowo orginalny text?</string>
+
+    <string-array name="codes_names">
+        <item>szyfr1</item>
+        <item>szyfr2</item>
+        <item>szyfr3</item>
+    </string-array>
+</resources>
